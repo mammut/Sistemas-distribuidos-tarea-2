@@ -21,7 +21,7 @@ El makefile tiene las siguientes opciones:
 killall rmiregistry
 ```
 
-Luego para levantar el servidor no es necesario iniciar rmiregistry, el makefile se encarga de levantarlo y levantarlo cuando es necesario.
+Luego para levantar el servidor no es necesario iniciar rmiregistry, el makefile se encarga de levantarlo y bajarlo cuando es necesario.
 
 Si se desea ejecutar rmiregistry manualmente, se debe hacer de la siguiente forma:
 
