@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
-public class Server implements Hello {
+public class Server implements MoM {
     private HashMap<String, String> subscriptions;
     private HashMap<String, LinkedList<String>> clientQueues;
     private ArrayList<String> queues;
@@ -41,7 +41,7 @@ public class Server implements Hello {
     }
 
     @Override
-    public Boolean subscribe(String queueName, String clientUUID) {
+    public Boolean subscribe(String clientUUID, String queueName) {
         System.out.println("[Server] Suscribiendo cliente " + clientUUID + " a la cola \"" + queueName + "\"");
         subscriptions.put(clientUUID, queueName);
         clientQueues.put(clientUUID, new LinkedList<String>());
@@ -65,10 +65,10 @@ public class Server implements Hello {
     public static void main(String[] args) {
         try {
             Server obj = new Server();
-            Hello stub = (Hello) UnicastRemoteObject.exportObject(obj, 0);
+            MoM stub = (MoM) UnicastRemoteObject.exportObject(obj, 0);
 
             Registry registry = LocateRegistry.getRegistry();
-            registry.bind("Hello", stub);
+            registry.bind("MoM", stub);
 
             System.out.println("[Server] Servidor esperando clientes...");
         }catch (Exception e){

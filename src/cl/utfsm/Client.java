@@ -14,7 +14,7 @@ public class Client {
     Boolean hasSuscription = false;
     String uuid;
     String host;
-    Hello stub;
+    MoM stub;
 
     public static void main(String[] args) {
         Client client = new Client();
@@ -28,7 +28,7 @@ public class Client {
 
         try {
             Registry registry = LocateRegistry.getRegistry(host);
-            this.stub = (Hello) registry.lookup("Hello");
+            this.stub = (MoM) registry.lookup("MoM");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,7 +83,7 @@ public class Client {
             if (this.hasSuscription) {
                 this.hasSuscription = this.stub.unsubscribe(this.uuid);
             }
-            this.hasSuscription = this.stub.subscribe(queues.get(s-1), this.uuid);;
+            this.hasSuscription = this.stub.subscribe(this.uuid, queues.get(s-1));
         }catch (RemoteException e){
             System.out.println(e.getMessage());
         }
