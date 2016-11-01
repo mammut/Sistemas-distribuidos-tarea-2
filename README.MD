@@ -1,6 +1,6 @@
 # Sistemas Distribuidos – Tarea 2: RMI & MoM
 
-![alt text](ups.png?raw=true "Me pase po")
+![alt text](ups.jpg?raw=true "Me pase po")
 
 ### Requerimientos
 El programa requiere `Java 1.8` y `rmiregistry` en el sistema.
@@ -22,3 +22,20 @@ killall rmiregistry
 ```
 
 Luego para levantar el servidor no es necesario iniciar rmiregistry, el makefile se encarga de levantarlo y levantarlo cuando es necesario.
+
+Si se desea ejecutar rmiregistry manualmente, se debe hacer de la siguiente forma:
+
+```bash
+> cd build/bin
+> rmiregistry &
+# para finalizar rmiregistry se hace con:
+> fg
+> [ctrl+c]
+```
+
+El makefile debe ser modificado en la linea 20, eliminando `rmiregistry` como dependencia de `run-server` y quitando killall del comando de la linea 21
+
+```make
+20| run-server: server
+21| 	java -classpath $(BIN_PATH) -Djava.rmi.server.codebase=file:$(BIN_PATH)/ cl.utfsm.Server
+```
